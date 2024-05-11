@@ -1,0 +1,59 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: express-mysql-js-server CI/CD
+
+# 메인 브랜치에 푸시, PR 될 때 트리거
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+    - uses: actions/checkout@v4
+    
+    - name: Set up AWS CLI
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.AWS_REGION }}
+
+    - name: Check EC2 instance status
+      id: check-instance
+      run: |
+        status=$(aws ec2 describe-instances --instance-ids ${{ secrets.INSTANCE_ID }} --query 'Reservations[*].Instances[*].State.Name' --output text)
+        if [ "$status" == "running" ]; then
+          echo "Instance is running, proceeding with deployment."
+          echo "::set-output name=status::running"
+        else
+          echo "Instance is not running, trying to start instance."
+          aws ec2 start-instances --instance-ids ${{ secrets.INSTANCE_ID }}
+          echo "::set-output name=status::starting"
+        fi
+
+    - name: Wait for instance to be ready
+      if: steps.check-instance.outputs.status == 'starting'
+      run: |
+        aws ec2 wait instance-running --instance-ids ${{ secrets.INSTANCE_ID }}
+        echo "Instance is now running."
+
+    - name: Deploy to EC2
+      if: steps.check-instance.outputs.status != 'stopped'
+      run: |
+        rsync -avz -e "ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY_PATH }}" --exclude='.git*' ./ ubuntu@${{ secrets.EC2_IP }}:/path/to/your/app
+        ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY_PATH }} ubuntu@${{ secrets.EC2_IP }} "cd /path/to/your/app && npm install && pm2 restart all"
+      env:
+        SSH_PRIVATE_KEY_PATH: /tmp/aws-ec2.pem
+
+    - name: Save private key
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ${{ env.SSH_PRIVATE_KEY_PATH }}
+        chmod 600 ${{ env.SSH_PRIVATE_KEY_PATH }}
