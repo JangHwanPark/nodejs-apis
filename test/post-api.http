@@ -1,0 +1,8 @@
+### POST
+http://localhost:5000/api/post/book-info
+Content-Type: application/json
+
+{
+  "title": "New Book",
+  "author": "Author Name"
+}

@@ -1,0 +1,11 @@
+### GET
+http://localhost:5000/api/get/books
+
+### GET
+http://localhost:5000/api/get/auth/login
+
+### GET
+http://localhost:5000/api/get/admin/user-info
+
+### GET
+http://localhost:5000/api/get/blog/posts

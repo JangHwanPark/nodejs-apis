@@ -11,9 +11,44 @@ app.use(cors()); // 모든 프론트 서버 허용
 
 // 서버 시작
 app.listen(process.env.PORT, () => {
-    console.log(`서버 시작 ${process.env.PORT}`)
+    console.log(`서버 시작 Port: ${process.env.PORT}`)
 })
 
+// Index page
 app.get("/", (req, res) => {
     res.send("나가세요.")
+})
+
+// Books
+app.get("/api/get/books", (req, res) => {
+    res.status(200).json({
+        "message": "response ok"
+    });
+});
+
+app.post("/api/post/book-info", (req, res) => {
+    res.status(200).json({
+        "message": "response ok"
+    });
+})
+
+// Auth (login / register)
+app.get("/api/get/auth/login", (req, res) => {
+    res.status(200).json({
+        "message": "response ok"
+    })
+});
+
+// admin
+app.get("/api/get/admin/user-info", (req, res) => {
+    res.status(200).json({
+        "message": "response ok"
+    })
+})
+
+// Blog
+app.get("/api/get/blog/posts", (req, res) => {
+    res.status(200).json({
+        "message": "response ok"
+    })
 })
