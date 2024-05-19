@@ -17,33 +17,25 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14'  # Node.js 버전을 지정합니다. 필요에 따라 버전 변경 가능
+          node-version: '18'  # Node.js 버전을 지정(Node.js 18.x). 필요에 따라 버전 변경 가능
+          cache: 'yarn'       # Yarn 캐시 활성화
+
+      # Yarn 설치
+      - name: Install Yarn
+        run: npm install -g yarn
 
       # 의존성 설치
       - name: Install dependencies
-        run: npm install
+        run: yarn install
 
-      # 빌드 단계 (예시)
+      # 빌드 단계
       - name: Build
-        run: npm run build
+        run: yarn build
 
-    # 테스트 단계 (테스트 코드 준비 완료 시 활성화)
-    # - name: Run tests
-    #   run: npm test
-
-    # EC2 배포 단계 (서버 준비 완료 시 활성화)
-    # - name: Deploy to EC2
-    #   if: steps.check-instance.outputs.status != 'stopped'
-    #   run: |
-    #     rsync -avz -e "ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY_PATH }}" --exclude='.git*' ./ ubuntu@${{ secrets.EC2_IP }}:/path/to/your/app
-    #     ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY_PATH }} ubuntu@${{ secrets.EC2_IP }} "cd /path/to/your/app && npm install && pm2 restart all"
-    #   env:
-    #     SSH_PRIVATE_KEY_PATH: /tmp/aws-ec2.pem
-
-    # AWS EC2 관련 설정 (서버 준비 완료 시 활성화)
-    # - name: Set up AWS CLI
-    #   uses: aws-actions/configure-aws-credentials@v1
-    #   with:
-    #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-    #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-    #     aws-region: ${{ secrets.AWS_REGION }}
+      # API 테스트 단계
+      - name: API Tests
+        run: |
+          curl -s http://localhost:5000/api/get/books
+          curl -s http://localhost:5000/api/get/auth/login
+          curl -s http://localhost:5000/api/get/admin/user-info
+          curl -s http://localhost:5000/api/get/blog/posts

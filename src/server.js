@@ -5,7 +5,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 
 // 서버 설정
-const app = express();
+export const app = express();
 dotenv.config(); // 환경변수 읽어오기
 app.use(cors()); // 모든 프론트 서버 허용
 
