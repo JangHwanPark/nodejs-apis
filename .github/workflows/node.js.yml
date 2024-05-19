@@ -34,22 +34,8 @@ jobs:
 
       # 로컬 서버 시작
       - name: Start API Server
-        run: node server.js & echo $! > PIDFILE
+        run: node src/server.js
 
       # 서버 시작 후 5초간 작업 중지
       - name: Delay for server startup
         run: sleep 5
-
-      # API 테스트 단계
-#      - name: API Tests
-#        run: |
-#          curl -s http://localhost:5000/api/get/books
-#          curl -s http://localhost:5000/api/get/auth/login
-#          curl -s http://localhost:5000/api/get/admin/user-info
-#          curl -s http://localhost:5000/api/get/blog/posts
-
-      # 프로세스 종료
-      - name: Stop API Server
-        run: |
-          kill $(cat PIDFILE)
-          rm PIDFILE
