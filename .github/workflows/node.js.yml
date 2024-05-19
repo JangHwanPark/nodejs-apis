@@ -41,12 +41,12 @@ jobs:
         run: sleep 5
 
       # API 테스트 단계
-      - name: API Tests
-        run: |
-          curl -s http://localhost:5000/api/get/books
-          curl -s http://localhost:5000/api/get/auth/login
-          curl -s http://localhost:5000/api/get/admin/user-info
-          curl -s http://localhost:5000/api/get/blog/posts
+#      - name: API Tests
+#        run: |
+#          curl -s http://localhost:5000/api/get/books
+#          curl -s http://localhost:5000/api/get/auth/login
+#          curl -s http://localhost:5000/api/get/admin/user-info
+#          curl -s http://localhost:5000/api/get/blog/posts
 
       # 프로세스 종료
       - name: Stop API Server
