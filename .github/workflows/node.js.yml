@@ -31,3 +31,7 @@ jobs:
       # 빌드
       - name: Build
         run: yarn build
+
+      # 테스트 코드 실행
+      - name: Run Test
+        run: yarn test
