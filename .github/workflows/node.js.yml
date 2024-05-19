@@ -28,14 +28,6 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      # 빌드 단계
+      # 빌드
       - name: Build
         run: yarn build
-
-      # 로컬 서버 시작
-      - name: Start API Server
-        run: node src/server.js
-
-      # 서버 시작 후 5초간 작업 중지
-      - name: Delay for server startup
-        run: sleep 5
