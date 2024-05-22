@@ -30,7 +30,25 @@ app.post("/api/post/book-info", (req, res) => {
     res.status(200).json({
         "message": "response ok"
     });
-})
+});
+
+app.get("/api/get/book-info/add", (req, res) => {
+    res.status(200).json({
+        "message": "response ok"
+    });
+});
+
+app.get("/api/get/book-info/:id/edit", (req, res) => {
+    res.status(200).json({
+        "message": "response ok"
+    });
+});
+
+app.get("/api/get/book-info/:id/delete", (req, res) => {
+    res.status(200).json({
+        "message": "response ok"
+    });
+});
 
 // Auth (login / register)
 app.get("/api/get/auth/login", (req, res) => {
@@ -38,6 +56,18 @@ app.get("/api/get/auth/login", (req, res) => {
         "message": "response ok"
     })
 });
+
+app.get("/api/get/auth/register", (req, res) => {
+    res.status(200).json({
+        "message": "response ok"
+    });
+});
+
+app.get("api/get/auth/logout", (req, res) => {
+    res.status(200).json({
+        "message": "response ok"
+    });
+})
 
 // admin
 app.get("/api/get/admin/user-info", (req, res) => {
@@ -52,3 +82,21 @@ app.get("/api/get/blog/posts", (req, res) => {
         "message": "response ok"
     })
 })
+
+app.get("api/get/blog/post/write", (req, res) => {
+    res.status(200).json({
+        "message": "response ok"
+    })
+});
+
+app.get("api/get/blog/post/edit", (req, res) => {
+    res.status(200).json({
+        "message": "response ok"
+    })
+});
+
+app.get("api/get/blog/post/delete", (req, res) => {
+    res.status(200).json({
+        "message": "response ok"
+    })
+});
