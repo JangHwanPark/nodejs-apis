@@ -4,6 +4,9 @@ import dotenv from "dotenv";
 import cors from "cors";
 import bodyParser from "body-parser";
 
+// 라우터 임포트
+import { router as booksRouter } from "./routes/books.js";
+
 // 서버 설정
 export const app = express();
 dotenv.config(); // 환경변수 읽어오기
@@ -20,35 +23,7 @@ app.get("/", (req, res) => {
 })
 
 // Books
-app.get("/api/get/books", (req, res) => {
-    res.status(200).json({
-        "message": "response ok"
-    });
-});
-
-app.post("/api/post/book-info", (req, res) => {
-    res.status(200).json({
-        "message": "response ok"
-    });
-});
-
-app.get("/api/get/book-info/add", (req, res) => {
-    res.status(200).json({
-        "message": "response ok"
-    });
-});
-
-app.get("/api/get/book-info/:id/edit", (req, res) => {
-    res.status(200).json({
-        "message": "response ok"
-    });
-});
-
-app.get("/api/get/book-info/:id/delete", (req, res) => {
-    res.status(200).json({
-        "message": "response ok"
-    });
-});
+app.use("/api/get", booksRouter);
 
 // Auth (login / register)
 app.get("/api/get/auth/login", (req, res) => {
