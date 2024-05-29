@@ -100,3 +100,5 @@ app.get("api/get/blog/post/delete", (req, res) => {
         "message": "response ok"
     })
 });
+
+// 자동입력 방지 보안 이미지 생성
