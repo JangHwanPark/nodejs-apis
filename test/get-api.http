@@ -2,6 +2,18 @@
 http://localhost:5000/api/get/books
 
 ### GET
+http://localhost:5000/api/get/book/info
+
+### GET
+http://localhost:5000/api/get/book/info/add/{{id}}
+
+### GET
+http://localhost:5000/api/get/book/info/delete/{{id}}
+
+### GET
+http://localhost:5000/api/get/book/info/edit/{{id}}
+
+### GET
 http://localhost:5000/api/get/auth/login
 
 ### GET

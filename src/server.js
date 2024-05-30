@@ -5,10 +5,13 @@ import cors from "cors";
 import bodyParser from "body-parser";
 
 // 라우터 임포트
-import { router as booksRouter } from "./routes/books.js";
+import booksRouter from "./routes/books.js";
+import authRouter from "./routes/auth.js";
+import adminRouter from "./routes/admin.js";
+import blogRouter from "./routes/blog.js";
 
 // 서버 설정
-export const app = express();
+const app = express();
 dotenv.config(); // 환경변수 읽어오기
 app.use(cors()); // 모든 프론트 서버 허용
 
@@ -23,57 +26,16 @@ app.get("/", (req, res) => {
 })
 
 // Books
+console.log(booksRouter instanceof express.Router);
 app.use("/api/get", booksRouter);
 
 // Auth (login / register)
-app.get("/api/get/auth/login", (req, res) => {
-    res.status(200).json({
-        "message": "response ok"
-    })
-});
-
-app.get("/api/get/auth/register", (req, res) => {
-    res.status(200).json({
-        "message": "response ok"
-    });
-});
-
-app.get("api/get/auth/logout", (req, res) => {
-    res.status(200).json({
-        "message": "response ok"
-    });
-})
+app.use("/auth", authRouter)
 
 // admin
-app.get("/api/get/admin/user-info", (req, res) => {
-    res.status(200).json({
-        "message": "response ok"
-    })
-})
+app.use("/admin", adminRouter)
 
 // Blog
-app.get("/api/get/blog/posts", (req, res) => {
-    res.status(200).json({
-        "message": "response ok"
-    })
-})
-
-app.get("api/get/blog/post/write", (req, res) => {
-    res.status(200).json({
-        "message": "response ok"
-    })
-});
-
-app.get("api/get/blog/post/edit", (req, res) => {
-    res.status(200).json({
-        "message": "response ok"
-    })
-});
-
-app.get("api/get/blog/post/delete", (req, res) => {
-    res.status(200).json({
-        "message": "response ok"
-    })
-});
+app.use("/blog", blogRouter)
 
 // 자동입력 방지 보안 이미지 생성
