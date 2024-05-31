@@ -53,7 +53,9 @@ router.post("/register", async  (req, res) => {
         // 필수 입력 필드 확인
         if (!uid || !name || !email || !password) {
             return res.status(400).json({
-                error: 'uid, name, email, and password are required'
+                "errorCode": 100,
+                "errorMessage": "Bad Request Exception",
+                "description": "uid, name, email, and password are required"
             });
         }
 
@@ -64,7 +66,9 @@ router.post("/register", async  (req, res) => {
 
         if (existingUser) {
             return res.status(409).json({
-                error: 'Email already in use'
+                "errorCode": 100,
+                "errorMessage": "Bad Request Exception",
+                "description": "Email already in use"
             });
         }
 
@@ -93,8 +97,9 @@ router.post("/register", async  (req, res) => {
         // Test
         console.error(error)
         res.status(500).json({
-            error: "Failed to create user",
-            log: error.message
+            "errorCode": 900,
+            "errorMessage": "Unexpected Error",
+            "description": "Failed to create user"
         });
     }
 });
