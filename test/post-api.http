@@ -8,10 +8,19 @@ Content-Type: application/json
   "password": "welcome2ansan12!!",
   "age": 30,
   "city": "Seoul",
-  "email": "john.doe@example.com",
+  "email": "john.doe@ansan.ac.kr",
   "phone": "010-1234-5678",
   "gender": "Male",
   "occupation": "Engineer",
   "join_date": "2024-05-29",
   "address": "1234 Some Street, Some City"
+}
+
+### POST
+POST http://localhost:5000/auth/login
+Content-Type: application/json
+
+{
+  "email": "john.doe@ansan.ac.kr",
+  "password": "welcome2ansan12!!"
 }

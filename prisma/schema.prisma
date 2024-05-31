@@ -14,7 +14,7 @@ model users {
   password String
   age Int
   city String
-  email String
+  email String @unique
   phone String
   gender String
   occupation String
