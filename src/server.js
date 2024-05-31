@@ -9,6 +9,7 @@ import booksRouter from "./routes/books.js";
 import authRouter from "./routes/auth.js";
 import adminRouter from "./routes/admin.js";
 import blogRouter from "./routes/blog.js";
+import errorHandler from "~/middlewares/errorHandler.js";
 
 // 서버 설정
 const app = express();
@@ -40,3 +41,6 @@ app.use("/admin", adminRouter)
 app.use("/blog", blogRouter)
 
 // 자동입력 방지 보안 이미지 생성
+
+// 미들웨어
+// app.use(errorHandler)
