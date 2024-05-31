@@ -12,8 +12,9 @@ import blogRouter from "./routes/blog.js";
 
 // 서버 설정
 const app = express();
-dotenv.config(); // 환경변수 읽어오기
-app.use(cors()); // 모든 프론트 서버 허용
+dotenv.config();         // 환경변수 읽어오기
+app.use(cors());         // 모든 프론트 서버 허용
+app.use(express.json()); // JSON 형식의 요청 본문을 파싱
 
 // 서버 시작
 app.listen(process.env.PORT, () => {
