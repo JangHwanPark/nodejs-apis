@@ -46,3 +46,18 @@ model coupang_products {
   reward String
   url String
 }
+
+model books {
+  book_id Int @id
+  name String
+  category String
+  author String
+  publisher String
+  discount String
+  price String
+  price_normal String
+  point String
+  description String? @default("")
+  review String
+  img String
+}
