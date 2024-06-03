@@ -1,4 +1,4 @@
-### POST
+### 회원가입 (Register)
 POST http://localhost:5000/auth/register
 Content-Type: application/json
 
@@ -16,7 +16,7 @@ Content-Type: application/json
   "address": "1234 Some Street, Some City"
 }
 
-### POST
+### 로그인 (Login)
 POST http://localhost:5000/auth/login
 Content-Type: application/json
 
@@ -24,3 +24,7 @@ Content-Type: application/json
   "email": "john.doe@ansan.ac.kr",
   "password": "welcome2ansan12!!"
 }
+
+### 로그아웃 (Logout)
+POST http://localhost:5000/auth/logout
+Authorization: Bearer <your-jwt-token-here>

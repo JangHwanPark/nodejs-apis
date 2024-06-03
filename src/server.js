@@ -6,7 +6,7 @@ import bodyParser from "body-parser";
 
 // 라우터 임포트
 import booksRouter from "./routes/books.js";
-import authRouter from "./routes/auth.js";
+import authRouter from "./routes/api/auth/auth.js";
 import adminRouter from "./routes/admin.js";
 import blogRouter from "./routes/blog.js";
 
