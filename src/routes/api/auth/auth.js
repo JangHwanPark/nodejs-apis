@@ -38,9 +38,8 @@ router.post("/login", async (req, res) => {
 
         // JWT 생성
         const token = jwt.sign(
-            { id: user.id, email: user.email },
-            process.env.JWT_SECRET,
-            { expiresIn: '1h' }
+            { id: user.id, email: user.email }, process.env.JWT_SECRET,
+            { expiresIn: process.env.TOKEN_EXPIRATION }
         );
 
         // 비밀번호 검증 (테스트시 주석처리)
