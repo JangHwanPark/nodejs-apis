@@ -9,10 +9,6 @@ import booksRouter from "./routes/books.js";
 import authRouter from "./routes/auth.js";
 import adminRouter from "./routes/admin.js";
 import blogRouter from "./routes/blog.js";
-<<<<<<< HEAD
-
-=======
->>>>>>> upstream/main
 
 // 서버 설정
 const app = express();
