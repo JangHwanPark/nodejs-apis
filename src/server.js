@@ -5,10 +5,10 @@ import cors from "cors";
 import bodyParser from "body-parser";
 
 // 라우터 임포트
-import booksRouter from "./routes/books.js";
+import booksRouter from "./routes/api/products/books.js";
 import authRouter from "./routes/api/auth/auth.js";
 import adminRouter from "./routes/api/admin/admin.js";
-import blogRouter from "./routes/blog.js";
+import blogRouter from "./routes/posts.js";
 
 // 서버 설정
 const app = express();
@@ -28,7 +28,7 @@ app.get("/", (req, res) => {
 
 // Books
 console.log(booksRouter instanceof express.Router);
-app.use("/api/get", booksRouter);
+app.use("/books", booksRouter);
 
 // Auth (login / register)
 app.use("/auth", authRouter)
