@@ -50,22 +50,23 @@ router.get("/:category", async (req, res) => {
     }
 });
 
-// 쿠팡 제품 수정
-// router.put("/update/:pid", async (req, res) => {
-//     const { pid } = req.params;
-//     const { category, name, base_price, price, unit_price, arrival, rating, reward, url } = req.body;
+// TODO 쿠팡 제품 수정
+router.post("/update/:pid", async (req, res) => {
+    const { pid } = req.params;
+    const { category, name, base_price, price, unit_price, arrival, rating, reward, url } = req.body;
 
-//     try {
-//         const product = await prisma.coupang_products.update({
-//             where: { pid: Number(pid) },
-//             data: { category, name, base_price, price, unit_price, arrival, rating, reward, url }
-//         });
-//         res.status(200).json(product);
-//     } catch (error) {
-//         console.error(error);
-//         commonError(res, 900, "Unexpected Error", "Failed to update product");
-//     }
-// });
+    try {
+        // 새로운 제품 추가
+
+        // 이전 제품 삭제
+
+
+        res.status(200).json(newProduct);
+    } catch (error) {
+        console.error(error);
+        commonError(res, 900, "Unexpected Error", "Failed to update product");
+    }
+});
 
 
 /* 쿠팡 제품 삭제 (coupang_products/delete*/ 
