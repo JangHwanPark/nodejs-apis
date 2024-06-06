@@ -63,3 +63,26 @@ model books {
   review String
   img String
 }
+
+model posts {
+  post_id         String   @id @default(uuid())
+  author_id   String
+  title      String
+  content    String
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  views      Int      @default(0)
+  likes      Int      @default(0)
+  comments   Int      @default(0)
+  tags       String
+}
+
+model admins {
+  admin_id         String   @id @default(uuid())
+  username   String   @unique
+  password   String
+  email      String   @unique
+  created_at  DateTime @default(now())
+  last_login  DateTime
+  is_active   Boolean
+}
