@@ -2,34 +2,40 @@ import express from "express";
 
 const router = express.Router();
 
-router.get("/books", (req, res) => {
+router.get("/", (req, res) => {
     res.status(200).json({
         "message": "response ok"
-    });
+    })
+})
+
+router.get("/:id", (req, res) => {
+    res.status(200).json({
+        "message": "response ok"
+    })
+})
+
+router.get("/limit", (req, res) => {
+    res.status(200).json({
+        "message": "response ok"
+    })
+})
+
+router.get("/write", (req, res) => {
+    res.status(200).json({
+        "message": "response ok"
+    })
 });
 
-router.get("/book/info", (req, res) => {
+router.put("/edit", (req, res) => {
     res.status(200).json({
         "message": "response ok"
-    });
+    })
 });
 
-router.get("/book/info/add/:id", (req, res) => {
+router.delete("/delete", (req, res) => {
     res.status(200).json({
         "message": "response ok"
-    });
-});
-
-router.get("/book/info/edit/:id", (req, res) => {
-    res.status(200).json({
-        "message": "response ok"
-    });
-});
-
-router.get("/book/info/delete/:id", (req, res) => {
-    res.status(200).json({
-        "message": "response ok"
-    });
+    })
 });
 
 export default router;

@@ -2,14 +2,12 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import bodyParser from "body-parser";
 
 // 라우터 임포트
-import booksRouter from "./routes/books.js";
-import authRouter from "./routes/auth.js";
+import booksRouter from "./routes/products/books.js";
+import signInRouter from "./routes/auth/login.js";
+import signUpRouter from "./routes/auth/register.js";
 import adminRouter from "./routes/admin.js";
-import blogRouter from "./routes/blog.js";
-import productRouter from "./routes/product.js";
 
 // 서버 설정
 const app = express();
@@ -28,22 +26,19 @@ app.get("/", (req, res) => {
 })
 
 // Books
-console.log(booksRouter instanceof express.Router);
-app.use("/api/get", booksRouter);
+const log = "booksRouter instanceof express.Router";
+console.log(`${log}: ${booksRouter instanceof express.Router}`);
+app.use("/books", booksRouter);
 
 // Auth (login / register)
-app.use("/auth", authRouter)
+app.use("/auth", signInRouter)
+app.use("/auth", signUpRouter)
 
 // admin
 app.use("/admin", adminRouter)
 
-// Blog
-app.use("/blog", blogRouter)
+// Posts
+app.use("/post", blogRouter)
 
-// Coupang Products
-app.use("/coupang_products", productRouter);
-
-// 자동입력 방지 보안 이미지 생성
-
-// 미들웨어
-// app.use(errorHandler)
+// 에러 핸들링 미들웨어
+app.use(errorHandler);
