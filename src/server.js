@@ -28,7 +28,7 @@ app.get("/", (req, res) => {
 
 // Books
 console.log(booksRouter instanceof express.Router);
-app.use("/api/get", booksRouter);
+app.use("/book", booksRouter);
 
 // Auth (login / register)
 app.use("/auth", authRouter)
