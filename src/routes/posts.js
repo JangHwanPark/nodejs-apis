@@ -2,25 +2,37 @@ import express from "express";
 
 const router = express.Router();
 
-router.get("/posts", (req, res) => {
+router.get("/", (req, res) => {
     res.status(200).json({
         "message": "response ok"
     })
 })
 
-router.get("/post/write", (req, res) => {
+router.get("/:id", (req, res) => {
+    res.status(200).json({
+        "message": "response ok"
+    })
+})
+
+router.get("/limit", (req, res) => {
+    res.status(200).json({
+        "message": "response ok"
+    })
+})
+
+router.get("/write", (req, res) => {
     res.status(200).json({
         "message": "response ok"
     })
 });
 
-router.get("/post/edit", (req, res) => {
+router.put("/edit", (req, res) => {
     res.status(200).json({
         "message": "response ok"
     })
 });
 
-router.get("/post/delete", (req, res) => {
+router.delete("/delete", (req, res) => {
     res.status(200).json({
         "message": "response ok"
     })
