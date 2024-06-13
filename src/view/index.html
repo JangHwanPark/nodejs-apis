@@ -3,78 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>학술</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        .endpoint {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+    </style>
 </head>
 <body>
 <header class="main_header">
-    <h1>MOOK</h1>
+    <h1>제목</h1>
     <nav class="main_nav">
-        <button class="modal-button" onclick="guide()">Guide</button>
+        <a href="#">Guide</a>
     </nav>
 </header>
-
-<section class="guide">
-    <h1>API란?</h1>
-    <div>API(Application Programming Interface)는 응용 프로그램이 서로 통신하고 데이터를 주고받을 수 있도록 하는 인터페이스입니다.</div>
-</section>
-
-<section class="guide">
-    <h1>어떨때 사용하나요?</h1>
-    <div>MOOK은 가짜 데이터가 필요할 때마다 사용할 수 있는 안산대학교 컴퓨터 공학과의 무료 REST API입니다.</div>
-</section>
-
 <section class="endpoint">
-    <h1>데이터 전체 조회 API</h1>
-    <div class="data_container">
-        <div>
-            <p>GET</p><a href="http://localhost:5000/admin/users">/admin/users</a>
-            <span id="user-count">유저 n명</span>
-        </div>
-        <div>
-            <p>GET</p><a href="http://localhost:5000/books/books">/books/books</a>
-            <span id="book-count">책 n권</span>
-        </div>
-        <div>
-            <p>GET</p><a href="http://localhost:5000/coupang_products/food">/coupang_products/foods</a>
-            <span id="coupang-count">쿠팡 음식 n개</span>
-        </div>
-    </div>
-</section>
-<section class="endpoint">
-    <h1>특정 ID의 데이터 조회 API</h1>
-    <div class="data_container">
-        <div>
-            <p>GET</p><a href="http://localhost:5000/admin/user/000043c2-b919-4281-9dab-f2a5b446973b">/admin/users/:uid</a>
-            <span>유저 아이디 1</span>
-        </div>
-        <div>
-            <p>GET</p><a href="http://localhost:5000/books/info/1">/books/info/1</a>
-            <span id="book-count-2">책 아이디 1</span>
-        </div>
-        <div>
-            <p>GET</p><a href="http://localhost:5000/coupang_products/food">/coupang_products/foods</a>
-            <span id="coupang-count-2">쿠팡 음식 아이디 1</span>
-        </div>
-    </div>
-</section>
-<section class="endpoint">
-    <h1>API 체험</h1>
-    <h3>특정 아이디의 책 조회</h3>
-    <div>
-        <label for="input-id">/books/info/</label>
-        <input type="text" id="input-id" placeholder="책의 ID를 입력하세요">
-        <button class="run-button" onclick="fetchSpecificData()">Run</button>
-    </div>
-    <pre id="result">{}</pre>
-</section>
+    <h2>User 관리</h2>
+    <a href="http://localhost:5000/admin/users">/유저 생성</a>
+    <a href="http://localhost:5000/admin/users">/유저 업데이트</a>
+    <a href="http://localhost:5000/admin/users">/유저 조회</a>
+    <a href="http://localhost:5000/admin/users">/유저 삭제</a>
 
-<div id="myModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <h2>Guide</h2>
-        <p>가이드입니다람쥐~</p>
-    </div>
-</div>
-<script src="script.js"></script>
+    <h2>Book 관리</h2>
+    <a href="http://localhost:5000/books/books">/책 추가</a>
+    <a href="http://localhost:5000/books/books">/책 정보 업데이트</a>
+    <a href="http://localhost:5000/books/books">/책 조회</a>
+    <a href="http://localhost:5000/books/books">/책 삭제</a>
+
+    <h2>쿠팡 제품 관리</h2>
+    음식 카테고리 조회
+    <a href="http://localhost:5000/coupang_products/food">/제품 추가</a>
+    <a href="http://localhost:5000/coupang_products/food">/제품 정보 업데이트</a>
+    <a href="http://localhost:5000/coupang_products/foods">/제품 조회</a>
+    <a href="http://localhost:5000/coupang_products/food">/제품 삭제</a>
+</section>
 </body>
 </html>
