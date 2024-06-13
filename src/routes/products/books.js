@@ -5,7 +5,7 @@ const router = express.Router();
 const prisma = new PrismaClient();
 
 // C: 책 추가 O
-router.post('/info/add', async (req, res) => {
+router.post('/add', async (req, res) => {
     try {
         const { book_id, name, category, author, publisher, discount, price, price_normal, point, description, review, img } = req.body;
         const newBook = await prisma.books.create({
@@ -31,7 +31,7 @@ router.post('/info/add', async (req, res) => {
 });
 
 // R: 모든 책 가져오기 O
-router.get('/', async (req, res) => {
+router.get('/books', async (req, res) => {
     try {
         const books = await prisma.books.findMany();
         res.status(200).json(books);
@@ -87,7 +87,7 @@ router.put('/info/edit/:id', async (req, res) => {
 });
 
 // D: 책 삭제 O
-router.delete('/info/delete/:id', async (req, res) => {
+router.delete('/delete/:id', async (req, res) => {
     try {
         const { id } = req.params;
         await prisma.books.delete({

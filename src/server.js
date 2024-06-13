@@ -8,11 +8,7 @@ import booksRouter from "./routes/products/books.js";
 import signInRouter from "./routes/auth/login.js";
 import signUpRouter from "./routes/auth/register.js";
 import adminRouter from "./routes/admin.js";
-import blogRouter from "./routes/posts.js";
-import githubRouter from "./routes/github/issue.js";
-
-// 미들웨어 임포트
-import errorHandler from "./middlewares/errorHandler.js";
+import coupangRouter from "./routes/products/coupang.js"; 
 
 // 서버 설정
 const app = express();
@@ -43,10 +39,7 @@ app.use("/auth", signUpRouter)
 app.use("/admin", adminRouter)
 
 // Posts
-app.use("/post", blogRouter)
+// app.use("/post", blogRouter)
 
-// GitHub
-app.use("/github", githubRouter)
-
-// 에러 핸들링 미들웨어
-app.use(errorHandler);
+// coupangs
+app.use("/coupang_products", coupangRouter)
