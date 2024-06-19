@@ -2,7 +2,7 @@
 http://localhost:5000/api/get/books
 
 ### GET
-http://localhost:5000/api/get/book/info
+http://localhost:5000/books
 
 ### GET
 http://localhost:5000/api/get/book/info/add/{{id}}

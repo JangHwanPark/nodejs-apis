@@ -53,6 +53,9 @@ app.use("/coupang_products", coupangRouter);
 app.use(timeoutMiddleware);
 app.use(retryMiddleware);
 
+// 정적파일 적용
+app.use(express.static(path.join(__dirname, "view")));
+
 // 서버 시작
 app.listen(process.env.PORT, () => {
     console.log(`서버 시작 Port: ${process.env.PORT}`)

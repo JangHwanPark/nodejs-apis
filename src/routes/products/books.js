@@ -1,8 +1,12 @@
 import express from 'express';
 import { PrismaClient } from '@prisma/client';
+import {init} from "../../utils/db.config.js";
 
 const router = express.Router();
 const prisma = new PrismaClient();
+
+let conn;
+(async () => {conn = await init();})();
 
 // C: 책 추가 O
 router.post('/add', async (req, res) => {
@@ -36,7 +40,11 @@ router.get('/books', async (req, res) => {
         const books = await prisma.books.findMany();
         res.status(200).json(books);
     } catch (error) {
-        res.status(500).json({ error: '책 가져오기 실패' });
+        res.status(500).json({
+            error: `Error: ${error.message}`
+        });
+        console.error(`Error type: ${error.constructor.name}`);
+        console.error(`Error stack: ${error.stack}`);
     }
 });
 
