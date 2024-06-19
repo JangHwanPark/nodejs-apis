@@ -55,6 +55,15 @@ router.get("/user/:uid", async (req, res) => {
         res.status(500).json({ error: `유저 조회 실패: ${error.message}` });
     }
 });
+//유저 수 조회
+router.get('/count', async (req, res) => {
+    try {
+        const count = await prisma.users.count();
+        res.status(200).json({ count });
+    } catch (error) {
+        res.status(500).json({ error: '책 개수 가져오기 실패' });
+    }
+});
 
 // U: 유저 정보 업데이트 (POST)
 router.post("/user/update/:uid", async (req, res) => {
@@ -98,5 +107,6 @@ router.delete("/user/:uid", async (req, res) => {
         res.status(500).json({ error: `유저 삭제 실패: ${error.message}` });
     }
 });
+
 
 export default router;
