@@ -1,12 +1,8 @@
 import express from 'express';
 import { PrismaClient } from '@prisma/client';
-import {init} from "../../utils/db.config.js";
 
 const router = express.Router();
 const prisma = new PrismaClient();
-
-let conn;
-(async () => {conn = await init();})();
 
 // C: 책 추가 O
 router.post('/add', async (req, res) => {
