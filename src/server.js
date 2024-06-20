@@ -31,29 +31,21 @@ app.get("/", (req, res) => {
     });
 });
 
-// Books
-const log = "booksRouter instanceof express.Router";
-console.log(`${log}: ${booksRouter instanceof express.Router}`);
-app.use("/books", booksRouter);
-
-// Auth (login / register)
+// Router
 app.use("/auth", signInRouter)
 app.use("/auth", signUpRouter)
-
-// admin
+app.use("/books", booksRouter);
 app.use("/admin", adminRouter)
-
-// coupangs
 app.use("/coupang-products", coupangRouter);
 
-// 타임아웃 적용
+// Timeout
 app.use(timeoutMiddleware);
 app.use(retryMiddleware);
 
 // 정적파일 적용
 app.use(express.static(path.join(__dirname, "view")));
 
-// 서버 시작
+// Start Server
 app.listen(process.env.PORT, () => {
     console.log(`서버 시작 Port: ${process.env.PORT}`)
 })
