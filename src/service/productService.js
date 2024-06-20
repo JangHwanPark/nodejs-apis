@@ -11,12 +11,6 @@ export const createProduct = async (productData) => {
     });
 }
 
-export const getAllProducts = async () => {
-    const products = await prisma.coupang_products.findMany();
-    if (products.length === 0) throw new Error("The product does not exist");
-    return products;
-}
-
 export const getProductsByCategory = async (category) => {
     return prisma.coupang_products.findMany({where: {category}});
 };
