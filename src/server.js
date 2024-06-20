@@ -7,8 +7,7 @@ import { fileURLToPath } from "url";
 
 // 라우터 임포트
 import booksRouter from "./routes/products/books.js";
-import signInRouter from "./routes/auth/login.js";
-import signUpRouter from "./routes/auth/register.js";
+import authRouter from "./routes/auth/auth.js";
 import adminRouter from "./routes/users.js";
 import coupangRouter from "./routes/products/coupang.js";
 import {retryMiddleware, timeoutMiddleware} from "./middlewares/retry.js";
@@ -32,8 +31,7 @@ app.get("/", (req, res) => {
 });
 
 // Router
-app.use("/auth", signInRouter)
-app.use("/auth", signUpRouter)
+app.use("/auth", authRouter)
 app.use("/books", booksRouter);
 app.use("/admin", adminRouter)
 app.use("/coupang-products", coupangRouter);
