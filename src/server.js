@@ -33,7 +33,7 @@ app.get("/", (req, res) => {
 // Router
 app.use("/auth", authRouter)
 app.use("/books", booksRouter);
-app.use("/admin", adminRouter)
+app.use("/users", adminRouter)
 app.use("/coupang-products", coupangRouter);
 
 // Timeout
