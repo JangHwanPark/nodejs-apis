@@ -9,7 +9,7 @@ import { fileURLToPath } from "url";
 import booksRouter from "./routes/products/books.js";
 import signInRouter from "./routes/auth/login.js";
 import signUpRouter from "./routes/auth/register.js";
-import adminRouter from "./routes/admin.js";
+import adminRouter from "./routes/users.js";
 import coupangRouter from "./routes/products/coupang.js";
 import {retryMiddleware, timeoutMiddleware} from "./middlewares/retry.js";
 
