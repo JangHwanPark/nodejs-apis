@@ -20,6 +20,7 @@ model users {
   join_date  String
   address    String
   password   String
+  reviews book_review[]
 }
 
 model orders {
@@ -87,4 +88,14 @@ model admins {
   created_at DateTime @db.DateTime(0)
   last_login DateTime @db.DateTime(0)
   is_active  Boolean
+}
+
+model book_review {
+  id Int @id @default(autoincrement())
+  product_id Int
+  review_text String
+  rating Float
+  created_at DateTime @default(now())
+  user       users   @relation(fields: [user_id], references: [uid])
+  user_id     String
 }

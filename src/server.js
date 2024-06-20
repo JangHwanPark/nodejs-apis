@@ -43,11 +43,8 @@ app.use("/auth", signUpRouter)
 // admin
 app.use("/admin", adminRouter)
 
-// Posts
-// app.use("/post", blogRouter)
-
 // coupangs
-app.use("/coupang_products", coupangRouter);
+app.use("/coupang-products", coupangRouter);
 
 // 타임아웃 적용
 app.use(timeoutMiddleware);
