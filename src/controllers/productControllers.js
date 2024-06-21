@@ -1,4 +1,5 @@
 import * as productService from "../service/productService.js";
+import * as prismaService from "../service/prismaService.js";
 
 // 공통 에러 처리 함수
 const handleCommonError = (res, errorCode, errorMessage, description ) => {
@@ -18,7 +19,8 @@ export const addProduct = async (req, res) => {
 
 export const getAllProducts = async (req, res) => {
     try {
-        const products = await productService.getAllProducts();
+        const products = await prismaService.getAllData('coupang_products');
+        if (products.length === 0) throw new Error("The product does not exist");
         res.status(200).json(products);
     } catch (error) {
         console.error(error);
