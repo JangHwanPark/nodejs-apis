@@ -43,7 +43,7 @@ async function fetchSpecificDatausers() {
 async function fetchSpecificDatabooks() {
     const input = document.getElementById('input-id-books').value;
     try {
-        const response = await fetch(`http://34.197.44.20/books/info/${input}`);
+        const response = await fetch(`http://localhost:5000/books/info/${input}`);
         const data = await response.json();
         document.getElementById('result').textContent = JSON.stringify(data, null, 2);
     } catch (error) {
