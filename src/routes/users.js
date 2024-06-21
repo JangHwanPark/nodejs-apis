@@ -9,6 +9,7 @@ import {
 } from "../controllers/userControllers.js";
 
 const router = express.Router();
+
 router.post("/user/create", createUser);
 router.get("/get/all", getAllUsers);
 router.get("/user/:uid", findUserById);
