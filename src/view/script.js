@@ -10,11 +10,6 @@ function closeModal() {
     modal.style.display = 'none';
 }
 
-
-async function fetchSpecificDatausers() {
-    const input = document.getElementById('input-id-users').value;
-    try {
-        const response = await fetch(`http://34.236.41.203:5000/users/user/${input}`);
         const data = await response.json();
         document.getElementById('result').textContent = JSON.stringify(data, null, 2);
     } catch (error) {
@@ -25,7 +20,7 @@ async function fetchSpecificDatausers() {
 async function fetchSpecificDatabooks() {
     const input = document.getElementById('input-id-books').value;
     try {
-        const response = await fetch(`http://34.236.41.203:5000/books/info/${input}`);
+
         const data = await response.json();
         document.getElementById('result').textContent = JSON.stringify(data, null, 2);
     } catch (error) {
@@ -36,7 +31,7 @@ async function fetchSpecificDatabooks() {
 async function fetchSpecificDataproducts() {
     const input = document.getElementById('input-id-products').value;
     try {
-        const response = await fetch(`http://34.236.41.203:5000/coupang_products/get/${input}`);
+
         const data = await response.json();
         document.getElementById('result').textContent = JSON.stringify(data, null, 2);
     } catch (error) {
@@ -70,4 +65,3 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-window.onload = fetchData;

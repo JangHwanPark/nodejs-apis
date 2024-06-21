@@ -28,16 +28,7 @@
     <h1>데이터 전체 조회 API</h1>
     <div class="data_container">
         <div>
-            <p>GET</p><a href="http://34.236.41.203:5000/users/get/all" target="_blank">users/get/all</a>
-            <span>전체 유저 조회</span>
-        </div>
-        <div>
-            <p>GET</p><a href="http://34.236.41.203:5000/books/books" target="_blank">/books/books</a>
-            <span>전체 책 조회</span>
-        </div>
-        <div>
-            <p>GET</p><a href="http://34.236.41.203:5000/coupang-products/get/all" target="_blank">coupang-products/get/all</a>
-            <span>전체 제품 조회</span>
+
         </div>
     </div>
 </section>
@@ -46,15 +37,7 @@
     <h1>특정 조건의 데이터 조회 API</h1>
     <div class="data_container">
         <div>
-            <p>GET</p><a href="http://34.236.41.203:5000/users/user/user8613" target="_blank">/users/1</a>
-            <span>유저 이름 user8613</span>
-        </div>
-        <div>
-            <p>GET</p><a href="http://34.236.41.203:5000/books/info/1" target="_blank">/books/info/1</a>
-            <span id="book-count-2">책 아이디 1</span>
-        </div>
-        <div>
-            <p>GET</p><a href="http://34.236.41.203:5000/coupang_products/get/food" target="_blank">/coupang_products/food</a>
+
             <span>쿠팡 제품 카테고리:음식</span>
         </div>
     </div>
@@ -66,13 +49,12 @@
         <ul>
             <li><a href="#" onclick="showInput('users'); return false;">특정 유저 조회</a></li>
             <li><a href="#" onclick="showInput('books'); return false;">특정 책 조회</a></li>
-            <li><a href="#" onclick="showInput('products'); return false;">특정 카테고리 조회</a></li>
+
         </ul>
     </nav>
     <div id="input-container">
         <div class="input-section users active">
-            <label for="input-id-users">/user/</label>
-            <input type="text" id="input-id-users" placeholder="유저의 name을 입력하세요">
+
             <button class="run-button" onclick="fetchSpecificDatausers()">Run</button>
         </div>
         <div class="input-section books">
@@ -81,8 +63,7 @@
             <button class="run-button" onclick="fetchSpecificDatabooks()">Run</button>
         </div>
         <div class="input-section products">
-            <label for="input-id-products">/coupang_products/get/</label>
-            <input type="text" id="input-id-products" placeholder="제품의 카테고리를 입력하세요">
+
             <button class="run-button" onclick="fetchSpecificDataproducts()">Run</button>
         </div>
     </div>
