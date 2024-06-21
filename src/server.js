@@ -42,6 +42,7 @@ app.use(retryMiddleware);
 
 // 정적파일 적용
 app.use(express.static(path.join(__dirname, "view")));
+app.set('view engine', 'ejs');
 
 // Start Server
 app.listen(process.env.PORT, () => {
