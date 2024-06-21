@@ -10,29 +10,11 @@ function closeModal() {
     modal.style.display = 'none';
 }
 
-async function fetchData() {
-    try {
-        const userResponse = await fetch('http://34.197.44.20/admin/count');
-        const userData = await userResponse.json();
-        document.getElementById('user-count').textContent = `전체 유저 ${userData.count}명 조회`;
-
-        const bookResponse = await fetch('http://34.197.44.20/books/count');
-        const bookData = await bookResponse.json();
-        document.getElementById('book-count').textContent = `전체 책 ${bookData.count}권 조회`;
-
-        const coupangResponse = await fetch('http://34.197.44.20/coupang_products/count');
-        const coupangData = await coupangResponse.json();
-        document.getElementById('coupang-count').textContent = `전체 쿠팡 제품 ${coupangData.count}개 조회`;
-
-    } catch (error) {
-        console.error('데이터 가져오기 실패:', error);
-    }
-}
 
 async function fetchSpecificDatausers() {
     const input = document.getElementById('input-id-users').value;
     try {
-        const response = await fetch(`http://34.197.44.20/admin/user/${input}`);
+        const response = await fetch(`http://34.236.41.203:5000/users/user/${input}`);
         const data = await response.json();
         document.getElementById('result').textContent = JSON.stringify(data, null, 2);
     } catch (error) {
@@ -43,7 +25,7 @@ async function fetchSpecificDatausers() {
 async function fetchSpecificDatabooks() {
     const input = document.getElementById('input-id-books').value;
     try {
-        const response = await fetch(`http://34.197.44.20/books/info/${input}`);
+        const response = await fetch(`http://34.236.41.203:5000/books/info/${input}`);
         const data = await response.json();
         document.getElementById('result').textContent = JSON.stringify(data, null, 2);
     } catch (error) {
@@ -54,7 +36,7 @@ async function fetchSpecificDatabooks() {
 async function fetchSpecificDataproducts() {
     const input = document.getElementById('input-id-products').value;
     try {
-        const response = await fetch(`http://34.197.44.20/coupang_products/product/${input}`);
+        const response = await fetch(`http://34.236.41.203:5000/coupang_products/get/${input}`);
         const data = await response.json();
         document.getElementById('result').textContent = JSON.stringify(data, null, 2);
     } catch (error) {
