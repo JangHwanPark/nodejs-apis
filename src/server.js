@@ -19,7 +19,11 @@ const __dirname = path.dirname(__filename);
 // 서버 설정
 const app = express();
 dotenv.config();         // 환경변수 읽어오기
-app.use(cors());         // 모든 프론트 서버 허용
+const corsOptions = {
+    credentials: true,
+    origin: ['http://localhost:5000', 'http://34.197.44.20:5000'] // Whitelist the domains you want to allow
+};
+app.use(cors(corsOptions));         // 모든 프론트 서버 허용
 app.use(express.json()); // JSON 형식의 요청 본문을 파싱
 
 // Index page
