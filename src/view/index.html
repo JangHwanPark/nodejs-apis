@@ -8,7 +8,7 @@
 </head>
 <body>
 <header class="main_header">
-    <h1>MOOK</h1>
+    <h1>MOCK</h1>
     <nav class="main_nav">
         <button class="modal-button" onclick="guide()">Guide</button>
     </nav>
@@ -21,51 +21,76 @@
 
 <section class="guide">
     <h1>어떨때 사용하나요?</h1>
-    <div>MOOK은 가짜 데이터가 필요할 때마다 사용할 수 있는 안산대학교 컴퓨터 공학과의 무료 REST API입니다.</div>
+    <div>MOCK은 가짜 데이터가 필요할 때마다 사용할 수 있는 안산대학교 컴퓨터 공학과의 무료 REST API입니다.</div>
 </section>
 
 <section class="endpoint">
     <h1>데이터 전체 조회 API</h1>
     <div class="data_container">
         <div>
-            <p>GET</p><a href="http://localhost:5000/admin/users">/admin/users</a>
-            <span id="user-count">유저 n명</span>
+            <p>GET</p><a href="http://34.197.44.20/admin/users" target="_blank">/admin/users</a>
+            <span id="user-count"></span>
         </div>
         <div>
-            <p>GET</p><a href="http://localhost:5000/books/books">/books/books</a>
-            <span id="book-count">책 n권</span>
+            <p>GET</p><a href="http://34.197.44.20/books/books" target="_blank">/books/books</a>
+            <span id="book-count"></span>
         </div>
         <div>
-            <p>GET</p><a href="http://localhost:5000/coupang_products/food">/coupang_products/foods</a>
-            <span id="coupang-count">쿠팡 음식 n개</span>
+            <p>GET</p><a href="http://34.197.44.20/coupang_products/all" target="_blank">/coupang_products/all</a>
+            <span id="coupang-count"></span>
         </div>
     </div>
 </section>
+
 <section class="endpoint">
-    <h1>특정 ID의 데이터 조회 API</h1>
+    <h1>특정 조건의 데이터 조회 API</h1>
     <div class="data_container">
         <div>
-            <p>GET</p><a href="http://localhost:5000/admin/user/000043c2-b919-4281-9dab-f2a5b446973b">/admin/users/:uid</a>
+            <p>GET</p><a href="http://34.197.44.20/admin/user/000043c2-b919-4281-9dab-f2a5b446973b" target="_blank">/admin/users/1</a>
             <span>유저 아이디 1</span>
         </div>
         <div>
-            <p>GET</p><a href="http://localhost:5000/books/info/1">/books/info/1</a>
+            <p>GET</p><a href="http://34.197.44.20/books/info/1" target="_blank">/books/info/1</a>
             <span id="book-count-2">책 아이디 1</span>
         </div>
         <div>
-            <p>GET</p><a href="http://localhost:5000/coupang_products/food">/coupang_products/foods</a>
-            <span id="coupang-count-2">쿠팡 음식 아이디 1</span>
+            <p>GET</p><a href="http://34.197.44.20/coupang_products/product/1" target="_blank">/coupang_products/product/1</a>
+            <span id="coupang-count-2">쿠팡 제품 아이디 1</span>
+        </div>
+        <div>
+            <p>GET</p><a href="http://34.197.44.20/coupang_products/food" target="_blank">/coupang_products/food</a>
+            <span>쿠팡 제품 카테고리:음식</span>
         </div>
     </div>
 </section>
+
 <section class="endpoint">
-    <h1>API 체험</h1>
-    <h3>특정 아이디의 책 조회</h3>
-    <div>
-        <label for="input-id">/books/info/</label>
-        <input type="text" id="input-id" placeholder="책의 ID를 입력하세요">
-        <button class="run-button" onclick="fetchSpecificData()">Run</button>
+    <h1>API TEST (GET)</h1>
+    <nav class="sub_nav">
+        <ul>
+            <li><a href="#" onclick="showInput('users'); return false;">특정 유저 조회</a></li>
+            <li><a href="#" onclick="showInput('books'); return false;">특정 책 조회</a></li>
+            <li><a href="#" onclick="showInput('products'); return false;">특정 제품 조회</a></li>
+        </ul>
+    </nav>
+    <div id="input-container">
+        <div class="input-section users active">
+            <label for="input-id-users">/admin/user/</label>
+            <input type="text" id="input-id-users" placeholder="유저의 ID를 입력하세요">
+            <button class="run-button" onclick="fetchSpecificDatausers()">Run</button>
+        </div>
+        <div class="input-section books">
+            <label for="input-id-books">/books/info/</label>
+            <input type="text" id="input-id-books" placeholder="책의 ID를 입력하세요">
+            <button class="run-button" onclick="fetchSpecificDatabooks()">Run</button>
+        </div>
+        <div class="input-section products">
+            <label for="input-id-products">/coupang_products/product/</label>
+            <input type="text" id="input-id-products" placeholder="제품의 ID를 입력하세요">
+            <button class="run-button" onclick="fetchSpecificDataproducts()">Run</button>
+        </div>
     </div>
+
     <pre id="result">{}</pre>
 </section>
 
