@@ -37,15 +37,15 @@ app.get("/", (req, res) => {
         title: "학술",
         message: "MOCK",
         endpoints: [
-            { method: "GET", url: "http://34.197.44.20/admin/users", description: "전체 유저 조회", id: "user-count" },
-            { method: "GET", url: "http://34.197.44.20/books/books", description: "전체 책 조회", id: "book-count" },
-            { method: "GET", url: "http://34.197.44.20/coupang_products/all", description: "전체 쿠팡 제품 조회", id: "coupang-count" }
+            { method: "GET", url: `${process.env.DOMAIN}/admin/users`, description: "전체 유저 조회", id: "user-count" },
+            { method: "GET", url: `${process.env.DOMAIN}/books/books`, description: "전체 책 조회", id: "book-count" },
+            { method: "GET", url: `${process.env.DOMAIN}/coupang_products/all`, description: "전체 쿠팡 제품 조회", id: "coupang-count" }
         ],
         specificEndpoints: [
-            { method: "GET", url: "http://34.197.44.20/admin/user/000043c2-b919-4281-9dab-f2a5b446973b", description: "특정 유저 조회" },
-            { method: "GET", url: "http://34.197.44.20/books/info/1", description: "특정 책 조회" },
-            { method: "GET", url: "http://34.197.44.20/coupang_products/product/1", description: "특정 제품 조회" },
-            { method: "GET", url: "http://34.197.44.20/coupang_products/food", description: "특정 카테고리 조회" }
+            { method: "GET", url: `${process.env.DOMAIN}/admin/user/000043c2-b919-4281-9dab-f2a5b446973b`, description: "특정 유저 조회" },
+            { method: "GET", url: `${process.env.DOMAIN}/books/info/1`, description: "특정 책 조회" },
+            { method: "GET", url: `${process.env.DOMAIN}/coupang_products/product/1`, description: "특정 제품 조회" },
+            { method: "GET", url: `${process.env.DOMAIN}/coupang_products/food`, description: "특정 카테고리 조회" }
         ],
         inputSections: [
             { type: "users", label: "/admin/user/", placeholder: "유저의 ID를 입력하세요" },
