@@ -1,5 +1,4 @@
-import {PrismaClient} from "@prisma/client";
-const prisma = new PrismaClient();
+import prisma from "../utils/prismaClient.js";
 
 /* 서비스 레이어는 실제 비즈니스로직을 구현하며, 쿼리, 계산, 외부 API 호출등을 처리한다. */
 export const createProduct = async (productData) => {

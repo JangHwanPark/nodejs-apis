@@ -1,9 +1,6 @@
 import bcrypt from "bcryptjs";
-import { PrismaClient } from "@prisma/client";
 import { validateRegistrationData, isEmailInUse } from "./validation.js";
-
-// 프리즈마 객체 생성
-const prisma = new PrismaClient();
+import prisma from "../../utils/prismaClient.js";
 
 /**
  * 사용자 정보를 등록.
@@ -18,7 +15,7 @@ export const registerUser = async (userData) => {
     const { uid, name, age, password, city, email, phone, gender, occupation, join_date, address } = userData;
 
     // 이메일 중복 확인
-    const emailInUse = await isEmailInUse(email);
+    const emailInUse = isEmailInUse(email);
     if (emailInUse) {
         throw new Error('Email already in use');
     }

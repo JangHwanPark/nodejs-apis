@@ -1,13 +1,11 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-import { PrismaClient } from "@prisma/client";
+import prisma from "../../utils/prismaClient.js";
 import { validateEmailAndPassword, validateRegistrationData } from "./validation.js";
-
-// 프리즈마 객체 생성
-const prisma = new PrismaClient();
 
 // JWT 블랙리스트를 메모리에 저장
 const blacklist = [];
+
 
 /**
  * 토큰을 JWT_SECRET 을 사용하여 검증한다.

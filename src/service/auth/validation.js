@@ -1,3 +1,5 @@
+import prisma from "../../utils/prismaClient.js";
+
 export const validateEmailAndPassword = (email, password) => {
     if (!email || !password) {
         throw new Error('Email and password are required');
