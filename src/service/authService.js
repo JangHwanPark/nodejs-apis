@@ -1,5 +1,7 @@
 import jwt from "jsonwebtoken";
-import {PrismaClient} from "@prisma/client";
+import bcrypt from "bcryptjs";
+import { PrismaClient } from "@prisma/client";
+import { validateEmailAndPassword, validateRegistrationData } from "./validation.js";
 
 // 프리즈마 객체 생성
 const prisma = new PrismaClient();
@@ -48,17 +50,21 @@ export const isBlacklisted = (token) => {
  * @throws {Error} - 인증 실패 시 에러 발생
  */
 export const authenticateUser = async (email, password) => {
+    // 이메일과 비밀번호 검증
+    validateEmailAndPassword(email, password);
+
     // 사용자 찾기
-    const user = await prisma.users.findUnique({where: { email }});
+    const user = await prisma.users.findUnique({ where: { email } });
     if (!user) throw new Error('Invalid email or password');
 
-    // 비밀번호 검증 (테스트시 주석처리)
+    // 비밀번호 검증
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) throw new Error('Invalid email or password');
 
     // JWT 생성
     const token = jwt.sign(
-        { id: user.id, email: user.email }, process.env.JWT_SECRET,
+        { id: user.id, email: user.email },
+        process.env.JWT_SECRET,
         { expiresIn: process.env.TOKEN_EXPIRATION }
     );
 
@@ -75,7 +81,7 @@ export const isEmailInUse = async (email) => {
     const existingUser = await prisma.users.findUnique({
         where: { email }
     });
-    return !existingUser;
+    return !!existingUser;
 }
 
 /**
@@ -85,13 +91,16 @@ export const isEmailInUse = async (email) => {
  * @returns {object} - 생성된 사용자 정보
  */
 export const registerUser = async (userData) => {
-    const {uid, name, age, password, city, email, phone, gender, occupation, join_date, address} = userData;
+    // 사용자 등록 데이터 검증
+    validateRegistrationData(userData);
+
+    const { uid, name, age, password, city, email, phone, gender, occupation, join_date, address } = userData;
 
     // 비밀번호 해싱
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // 사용자 생성
     return prisma.users.create({
-        data: {uid, name, age, password: hashedPassword, city, email, phone, gender, occupation, join_date: new Date(join_date), address,},
+        data: { uid, name, age, password: hashedPassword, city, email, phone, gender, occupation, join_date: new Date(join_date), address },
     });
 }
