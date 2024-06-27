@@ -1,7 +1,8 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
+import { validateEmailAndPassword } from "./validation.js";
 import prisma from "../../utils/prismaClient.js";
-import { validateEmailAndPassword, validateRegistrationData } from "./validation.js";
+import UserModel from "../../models/UserModel.js";
 
 // JWT 블랙리스트를 메모리에 저장
 const blacklist = [];
@@ -63,11 +64,40 @@ export const authenticateUser = async (email, password) => {
     if (!isPasswordValid) throw new Error('Invalid email or password');
 
     // JWT 생성
-    const token = jwt.sign(
+    /*const token = jwt.sign(
         { id: user.id, email: user.email },
         process.env.JWT_SECRET,
         { expiresIn: process.env.TOKEN_EXPIRATION }
-    );
+    );*/
 
+    // 사용자 모델 생성
+    const userModel = new UserModel(
+        user.id,
+        user.uid,
+        user.name,
+        user.email
+    )
+
+    // JWT 액세스 토큰 생성
+    const accessToken = jwt.sign(
+        { user: userModel },
+        process.env.JWT_SECRET,
+        { expiresIn: process.env.ACCESS_TOKEN_EXPRIATION }
+    )
+
+    // JWT 리프레시 토큰 생성
+    const refreshToken = jwt.sign(
+        { user: userModel },
+        process.env.JWT_SECRET,
+        { expiresIn: process.env.REFRESH_TOKEN_EXPIRATION }
+    )
+
+    // 데이터 베이스에 리프레시 토큰 저장
+    await prisma.refreshToken.create({
+        data: {
+            token: refreshToken,
+            userId: user.id
+        }
+    })
     return { user, token };
 }
