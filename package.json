@@ -17,7 +17,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@prisma/client": "^5.15.1",
+    "@prisma/client": "^5.16.0",
     "aws-sdk": "^2.1632.0",
     "axios": "^1.7.2",
     "bcryptjs": "^2.4.3",
