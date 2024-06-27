@@ -1,4 +1,5 @@
-import * as authService from "../service/authService.js";
+import * as authService from "../service/auth/authService.js";
+import {isEmailInUse} from "../service/auth/validation.js";
 
 // 공통 에러 처리 함수
 const handleCommonError = (res, errorCode, errorMessage, description ) => {
@@ -57,13 +58,13 @@ export const registerUser = async (req, res) => {
         }
 
         // 이메일 중복 확인
-        const isEmailUsed = authService.isEmailInUse(email);
+        const isEmailUsed = isEmailInUse(email);
         if (isEmailUsed) {
             return handleCommonError(res, 100, "Unexpected Error", "Email already in use");
         }
 
         // 사용자 등록
-        const user = await authService.registerUser(req.body);
+        const user = await registerUser(req.body);
 
         // 응답 전송
         res.status(201).json(user);
