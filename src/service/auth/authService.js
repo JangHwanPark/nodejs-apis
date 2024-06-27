@@ -21,6 +21,7 @@ export const verifyToken = (token) => {
     return jwt.verify(token, process.env.JWT_SECRET);
 }
 
+
 /**
  * 토큰을 블랙리스트에 추가하며, 이후 요청시 사용이 거부된다.
  * 사용자가 로그아웃할 때 해당 토큰을 더 이상 사용하지 못하도록 하기 위해 사용된다.
@@ -31,6 +32,7 @@ export const addToBlacklist = (token) => {
     blacklist.push(token);
 }
 
+
 /**
  * 주어진 토큰이 블랙리스트에 있는지 확인한다.
  *
@@ -40,6 +42,7 @@ export const addToBlacklist = (token) => {
 export const isBlacklisted = (token) => {
     return blacklist.includes(token);
 }
+
 
 /**
  * 사용자 인증을 처리하고 JWT 토큰을 생성한다.
@@ -69,38 +72,4 @@ export const authenticateUser = async (email, password) => {
     );
 
     return { user, token };
-}
-
-/**
- * 이메일 중복 확인
- *
- * @param {string} email - 확인할 이메일
- * @returns {boolean} - 중복된 이메일이 있는지 여부
- */
-export const isEmailInUse = async (email) => {
-    const existingUser = await prisma.users.findUnique({
-        where: { email }
-    });
-    return !!existingUser;
-}
-
-/**
- * 사용자 정보를 등록.
- *
- * @param {object} userData - 사용자 정보 데이터
- * @returns {object} - 생성된 사용자 정보
- */
-export const registerUser = async (userData) => {
-    // 사용자 등록 데이터 검증
-    validateRegistrationData(userData);
-
-    const { uid, name, age, password, city, email, phone, gender, occupation, join_date, address } = userData;
-
-    // 비밀번호 해싱
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // 사용자 생성
-    return prisma.users.create({
-        data: { uid, name, age, password: hashedPassword, city, email, phone, gender, occupation, join_date: new Date(join_date), address },
-    });
 }
