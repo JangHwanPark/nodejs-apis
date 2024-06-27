@@ -2,46 +2,6 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import { validateEmailAndPassword } from "./validation.js";
 import prisma from "../../utils/prismaClient.js";
-import UserModel from "../../models/UserModel.js";
-
-// JWT 블랙리스트를 메모리에 저장
-const blacklist = [];
-
-
-/**
- * 토큰을 JWT_SECRET 을 사용하여 검증한다.
- * 토큰이 유효하지 않거나 만료된 경우 에러가 발생한다.
- *
- * @param {string} token - 검증할 JWT 토큰
- * @returns {object} - 디코딩된 JWT 토큰 페이로드
- * @throws {JsonWebTokenError} - 토큰이 유효하지 않거나 만료된 경우 발생
- */
-export const verifyToken = (token) => {
-    return jwt.verify(token, process.env.JWT_SECRET);
-}
-
-
-/**
- * 토큰을 블랙리스트에 추가하며, 이후 요청시 사용이 거부된다.
- * 사용자가 로그아웃할 때 해당 토큰을 더 이상 사용하지 못하도록 하기 위해 사용된다.
- *
- * @param {string} token - 블랙리스트에 추가할 JWT 토큰
- */
-export const addToBlacklist = (token) => {
-    blacklist.push(token);
-}
-
-
-/**
- * 주어진 토큰이 블랙리스트에 있는지 확인한다.
- *
- * @param {string} token - 확인할 JWT 토큰
- * @returns {boolean} - 블랙리스트에 있으면 true, 아니면 false
- */
-export const isBlacklisted = (token) => {
-    return blacklist.includes(token);
-}
-
 
 /**
  * 사용자 인증을 처리하고 JWT 토큰을 생성한다.
@@ -55,49 +15,76 @@ export const authenticateUser = async (email, password) => {
     // 이메일과 비밀번호 검증
     validateEmailAndPassword(email, password);
 
-    // 사용자 찾기
-    const user = await prisma.users.findUnique({ where: { email } });
-    if (!user) throw new Error('Invalid email or password');
+    try {
+        // 사용자 찾기
+        console.log("이메일로 사용자 찾기 시도:", email);
+        const user = await prisma.users.findUnique({ where: { email } });
+        console.log("찾은 사용자:", user);
 
-    // 비밀번호 검증
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-    if (!isPasswordValid) throw new Error('Invalid email or password');
-
-    // JWT 생성
-    /*const token = jwt.sign(
-        { id: user.id, email: user.email },
-        process.env.JWT_SECRET,
-        { expiresIn: process.env.TOKEN_EXPIRATION }
-    );*/
-
-    // 사용자 모델 생성
-    const userModel = new UserModel(
-        user.id,
-        user.uid,
-        user.name,
-        user.email
-    )
-
-    // JWT 액세스 토큰 생성
-    const accessToken = jwt.sign(
-        { user: userModel },
-        process.env.JWT_SECRET,
-        { expiresIn: process.env.ACCESS_TOKEN_EXPRIATION }
-    )
-
-    // JWT 리프레시 토큰 생성
-    const refreshToken = jwt.sign(
-        { user: userModel },
-        process.env.JWT_SECRET,
-        { expiresIn: process.env.REFRESH_TOKEN_EXPIRATION }
-    )
-
-    // 데이터 베이스에 리프레시 토큰 저장
-    await prisma.refreshToken.create({
-        data: {
-            token: refreshToken,
-            userId: user.id
+        if (!user) {
+            throw new Error('Invalid email');
         }
-    })
-    return { user, token };
-}
+
+        // 데이터베이스에 저장된 비밀번호가 해싱되지 않은 경우, 비밀번호를 해싱하여 비교
+        let hashedPasswordFromDB = user.password;
+        console.log("해싱된 비밀번호 (DB에서):", hashedPasswordFromDB);
+
+        if (!hashedPasswordFromDB.startsWith("$2a$")) {
+            // 데이터베이스에 저장된 비밀번호가 해싱되지 않은 경우에만 해싱 처리
+            console.log("비밀번호가 해싱되지 않았음. 해싱 중...");
+            hashedPasswordFromDB = await bcrypt.hash(user.password, 10);
+            console.log("해싱된 비밀번호:", hashedPasswordFromDB);
+
+            // 데이터베이스에 해싱된 비밀번호 업데이트
+            await prisma.users.update({
+                where: { email },
+                data: { password: hashedPasswordFromDB },
+            });
+            console.log("데이터베이스에 해싱된 비밀번호 업데이트 완료.");
+        }
+
+        // 비밀번호 비교
+        const isPasswordValid = await bcrypt.compare(password, hashedPasswordFromDB);
+        console.log("비밀번호 유효성 검사 결과:", isPasswordValid);
+
+        if (!isPasswordValid) {
+            throw new Error('Invalid email or password');
+        }
+
+        // JWT 액세스 토큰 생성 (토큰 페이로드에 필요한 정보만 포함)
+        const accessToken = jwt.sign(
+            {
+                id: user.id,
+                email: user.email,
+            },
+            process.env.JWT_SECRET,
+            { expiresIn: process.env.ACCESS_TOKEN_EXPIRATION }
+        );
+        console.log("액세스 토큰 생성 완료:", accessToken);
+
+        // JWT 리프레시 토큰 생성 
+        const refreshToken = jwt.sign(
+            {
+                id: user.id,
+                email: user.email,
+            },
+            process.env.JWT_SECRET,
+            { expiresIn: process.env.REFRESH_TOKEN_EXPIRATION }
+        );
+        console.log("리프레시 토큰 생성 완료:", refreshToken);
+
+        // 데이터베이스에 리프레시 토큰 저장
+        await prisma.refreshToken.create({
+            data: {
+                token: refreshToken,
+                userId: user.id
+            }
+        });
+        console.log("리프레시 토큰 데이터베이스 저장 완료.");
+
+        return { user, accessToken, refreshToken };
+    } catch (error) {
+        console.error("사용자 인증 중 에러 발생:", error.message);
+        throw new Error("인증 실패");
+    }
+};
