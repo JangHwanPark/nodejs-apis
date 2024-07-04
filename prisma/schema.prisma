@@ -9,7 +9,7 @@ datasource db {
 }
 
 model users {
-  uid        String @id
+  uid        String @id @default(uuid())
   name       String
   age        Int
   city       String

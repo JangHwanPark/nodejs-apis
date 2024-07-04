@@ -7,8 +7,8 @@ export const validateEmailAndPassword = (email, password) => {
 }
 
 export const validateRegistrationData = (userData) => {
-    const { uid, name, email, password } = userData;
-    if (!uid || !name || !email || !password) {
+    const { name, email, password } = userData;
+    if (!name || !email || !password) {
         throw new Error('uid, name, email, and password are required');
     }
 }
@@ -20,8 +20,7 @@ export const validateRegistrationData = (userData) => {
  * @returns {boolean} - 중복된 이메일이 있는지 여부
  */
 export const isEmailInUse = async (email) => {
-    const existingUser = await prisma.users.findUnique({
-        where: { email }
+    return prisma.users.findUnique({
+        where: {email}
     });
-    return !!existingUser;
 }

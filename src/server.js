@@ -38,7 +38,7 @@ app.get("/", (req, res) => {
         message: "MOCK",
         endpoints: [
             { method: "GET", url: `${process.env.DOMAIN}/admin/users`, description: "전체 유저 조회", id: "user-count" },
-            { method: "GET", url: `${process.env.DOMAIN}/books/books`, description: "전체 책 조회", id: "book-count" },
+            { method: "GET", url: `${process.env.DOMAIN}/books/book`, description: "전체 책 조회", id: "book-count" },
             { method: "GET", url: `${process.env.DOMAIN}/coupang_products/all`, description: "전체 쿠팡 제품 조회", id: "coupang-count" }
         ],
         specificEndpoints: [

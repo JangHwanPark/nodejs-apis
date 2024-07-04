@@ -1,4 +1,8 @@
-import {authenticateUser} from "../../service/auth/authService.js";
+import {
+  addToBlacklist,
+  authenticateUser,
+  verifyToken
+} from "../../service/auth/LoginService.js";
 
 // 공통 에러 처리 함수
 const handleCommonError = (res, errorCode, errorMessage, description ) => {
@@ -15,7 +19,6 @@ const handleCommonError = (res, errorCode, errorMessage, description ) => {
  */
 export const signIn = async (req, res) => {
     const { email, password } = req.body;
-  
     try {
       // 필수 입력 필드 확인
       if (!email || !password) {
@@ -26,7 +29,6 @@ export const signIn = async (req, res) => {
       const { user, accessToken } = await authenticateUser(email, password);
   
       // 로그인 성공
-      console.log(`사용자 ${email}이(가) 로그인하였습니다.`);
       res.status(200).json({
         message: 'Login successful',
         user: user,
@@ -44,7 +46,7 @@ export const signOut = async (req, res) => {
     const token = req.header('Authorization').replace('Bearer ', '');
     try {
         verifyToken(token);
-        addToBlacklist(token);
+        await addToBlacklist(token);
         res.status(200).json({message: "Logout successful"});
     } catch (error) {
         handleCommonError(res, 500, "Unexpected Error", "Failed to log out");
