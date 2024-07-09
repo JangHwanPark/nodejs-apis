@@ -22,5 +22,12 @@
         </ul>
     </nav>
 </main>
+<script>
+    const authDom = document.querySelector('.api-guide-item:last-child');
+    authDom.addEventListener('click', (e) => {
+        e.preventDefault();
+        alert('준비중인 API 문서입니다.');
+    });
+</script>
 </body>
 </html>
