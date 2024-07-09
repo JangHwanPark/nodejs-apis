@@ -8,14 +8,9 @@
     height: 100%;
     margin: 0 auto;
     text-align: left;
-}
-
-.hero-wrapper:before {
-    width: 289px;
-    height: 100%;
-    display: inline-block;
-    vertical-align: middle;
-    content: '';
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .hero-content {

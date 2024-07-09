@@ -6,28 +6,78 @@
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../header.css">
     <link rel="stylesheet" href="../guide.css">
+    <link rel="stylesheet" href="../hero.css">
 </head>
 <body>
 <!-- import header -->
 <%- include('../components/header', { message: message }) %>
-
+<!-- import hero -->
+<%- include('../components/hero', { hero: hero }) %>
 <main class="api-guide-container">
-    <h1 class="api-guide-title">API Documentation</h1>
-    <nav class="api-guide-nav">
-        <ul class="api-guide-list">
-            <li class="api-guide-item"><a href="/guide/get/users" class="api-guide-link">GET / User Info API 문서</a></li>
-            <li class="api-guide-item"><a href="/guide/get/books" class="api-guide-link">GET / Book Info API 문서</a></li>
-            <li class="api-guide-item"><a href="/guide/get/coupang" class="api-guide-link">GET / Products Info API 문서</a></li>
-            <li class="api-guide-item"><a href="#" class="api-guide-link">POST / Auth API 문서</a></li>
+    <section class="timeline">
+        <ul>
+            <li>
+                <div>
+                    <time>v1</time> <a href="/guide/get/users" class="api-guide-link">GET / User Info API 문서</a>
+                </div>
+            </li>
+            <li>
+                <div>
+                    <time>v1</time> <a href="/guide/get/books" class="api-guide-link">GET / Book Info API 문서</a>
+                </div>
+            </li>
+            <li>
+                <div>
+                    <time>v1</time> <a href="/guide/get/coupang" class="api-guide-link">GET / Products Info API 문서</a>
+                </div>
+            </li>
+            <li>
+                <div class="alert">
+                    <time>v1</time><a href="#" class="api-guide-link">POST / Auth API 문서</a>
+                </div>
+            </li>
         </ul>
-    </nav>
+    </section>
+
 </main>
 <script>
-    const authDom = document.querySelector('.api-guide-item:last-child');
-    authDom.addEventListener('click', (e) => {
+    (function () {
+      "use strict";
+
+      // define variables
+      let items = document.querySelectorAll(".timeline li");
+      let auth = document.querySelector('.alert')
+
+      // check if an element is in viewport
+      // http://stackoverflow.com/questions/123999/how-to-tell-if-a-dom-element-is-visible-in-the-current-viewport
+      function isElementInViewport(el) {
+        let rect = el.getBoundingClientRect();
+        return (
+          rect.top >= 0 &&
+          rect.left >= 0 &&
+          rect.bottom <=
+          (window.innerHeight || document.documentElement.clientHeight) &&
+          rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+      }
+
+      function callbackFunc() {
+        for (let i = 0; i < items.length; i++) {
+          if (isElementInViewport(items[i])) {
+            items[i].classList.add("in-view");
+          }
+        }
+      }
+
+      // listen for events
+      window.addEventListener("load", callbackFunc);
+      window.addEventListener("resize", callbackFunc);
+      window.addEventListener("scroll", callbackFunc);
+      auth.addEventListener('click', (e) => {
         e.preventDefault();
-        alert('준비중인 API 문서입니다.');
-    });
+        alert('준비중 입니다.')
+      })
+    })();
 </script>
 </body>
 </html>

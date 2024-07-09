@@ -27,6 +27,7 @@ export const renderIndexPage = (req, res) => {
 export const renderGuidePage = (req, res) => {
   const data = {
     message: "MOCK",
+    hero: 'Documentation',
   };
   res.render('guide/index', data);
 };
