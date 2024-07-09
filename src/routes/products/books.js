@@ -31,7 +31,7 @@ router.post('/add', async (req, res) => {
 });
 
 // R: 모든 책 가져오기 O
-router.get('/books', async (req, res) => {
+router.get('/v1/get/all', async (req, res) => {
     try {
         const books = await prisma.books.findMany();
         res.status(200).json(books);
@@ -45,7 +45,7 @@ router.get('/books', async (req, res) => {
 });
 
 // R: 특정 책 가져오기 O
-router.get('/info/:id', async (req, res) => {
+router.get('/v1/get/info/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const book = await prisma.books.findUnique({

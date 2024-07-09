@@ -10,7 +10,7 @@ const router = express.Router();
 router.use('/auth', authRouter);
 router.use('/books', booksRouter);
 router.use('/users', adminRouter);
-router.use('/coupang-products', coupangRouter);
+router.use('/products', coupangRouter);
 router.use('/github', githubRouter);
 
 export default router;

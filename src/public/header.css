@@ -1,25 +1,23 @@
 .main_header {
-    background-color: #086fb6;
-}
-
-.main_header .logo {
-    color: #fff;
+    height: 70px;
+    position: relative;
 }
 
 .header-wrapper {
-    padding: 1rem;
+    width: 1168px;
+    height: 100%;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.main_header h1 {
-    margin: 0 0 0 25px;
+.link-wrapper a,
+.guide-link a {
+    color: #595959;
+    text-decoration: none;
 }
 
-.main_nav a {
-    margin-right: 25px;
-    color: #fff;
-    font-size: 20px;
-    font-weight: 400;
+.guide-link a:hover {
+    color: #589fb8;
 }

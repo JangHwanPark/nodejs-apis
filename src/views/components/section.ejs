@@ -1,0 +1,28 @@
+<section class="contents">
+    <h2><%= title %></h2>
+    <div class="data_container">
+        <% endpoints.forEach(endpoint => { %>
+            <div>
+                <p>
+                    <%= endpoint.method %>&nbsp
+                    <a href="<%= endpoint.url %>" target="_blank">
+                        <%= endpoint.description %>
+                    </a>
+                </p>
+                <span id="<%= endpoint.id %>"></span>
+            </div>
+        <% }) %>
+    </div>
+</section>
+<section class="contents">
+    <h2><%= subTitle %></h2>
+    <div class="data_container">
+        <% specificEndpoints.forEach(endpoint => { %>
+            <div>
+                <p><%= endpoint.method %>
+                    <a href="<%= endpoint.url %>" target="_blank"><%= endpoint.description %></a>
+                </p>
+            </div>
+        <% }) %>
+    </div>
+</section>
