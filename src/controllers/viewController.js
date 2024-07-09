@@ -36,6 +36,9 @@ export const renderCoupangPage = (req, res) => {
   const data = {
     message: "MOCK",
     hero: 'Documentation',
+    resourceFetch: `fetch('http://34.236.41.203:5000/products/v1/get/all')
+        .then((response) => response.json())
+        .then((json) => console.log(json));`,
     mock: {
       "pid": "6001",
       "category": "Electronics",
@@ -57,6 +60,13 @@ export const renderBookPage = (req, res) => {
   const data = {
     message: "MOCK",
     hero: 'Books',
+    getTitle: 'EndPoint - GET books/v1/get/all',
+    getTitleId: 'EndPoint - GET books/v1/get/:id',
+    resourceFetch: `fetch('http://34.236.41.203:5000/books/v1/get/all')
+        .then((response) => response.json())
+        .then((json) => console.log(json));`,
+    descriptionAll: '도서 조회 API 는 데이터베이스에 등록된 모든 도서 정보를 JSON 형식으로 반환하는 API 입니다.',
+    descriptionId: '이 API 는 도서의 고유 식별번호를 사용하여 특정 도서를 JSON 형식으로 반환하는 API 입니다.',
     mock: {
       "book_id": 2,
       "name": "예약판매 최고의 프로덕트는 무엇이 다른가",
@@ -80,7 +90,13 @@ export const renderUserPage = (req, res) => {
   const data = {
     message: "MOCK",
     hero: 'Users',
-    guideTitle: 'EndPoint - GET users/v1/get/all',
+    getTitle: 'EndPoint - GET users/v1/get/all',
+    getTitleId: 'EndPoint - GET users/v1/get/:id',
+    resourceFetch: `fetch('http://34.236.41.203:5000/users/v1/get/all')
+        .then((response) => response.json())
+        .then((json) => console.log(json));`,
+    descriptionAll: '사용자 조회 API는 등록된 모든 사용자를 조회하여 JSON 형식으로 반환하는 API 입니다.',
+    descriptionId: 'users/user/{uid} 는 사용자의 고유 식별번호를 사용하여 특정 사용자를 조회하여 JSON 형식으로 반환하는 API 입니다.',
     mock: {
       "uid": "123456",
       "name": "홍길동",

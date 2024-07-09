@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../../header.css">
     <link rel="stylesheet" href="../../error.css">
     <link rel="stylesheet" href="../../hero.css">
+    <link rel="stylesheet" href="../../guide-detail.css">
 </head>
 <body>
 <!-- import header -->
@@ -21,9 +22,13 @@
             <p>상품 조회 API 는 데이터베이스에 등록된 모든 상품정보를 JSON 형식으로 반환하는 API 입니다.</p>
             <p>아래는 Fetch API 를 사용한 예시지만 다른 언어에서도 API를 사용할 수 있습니다.</p>
 
-            <h4>응답 예시 (성공)</h4>
+            <h4 class="guide-sub-title">리소스 요청</h4>
+            <pre><code><%= resourceFetch %></code></pre>
+
+            <h4 class="guide-sub-title">응답 예시 (성공)</h4>
             <pre><code><%= JSON.stringify(mock, null, 2) %></code></pre>
-            <h4>응답 예시 (실패)</h4>
+
+            <h4 class="guide-sub-title">응답 예시 (실패)</h4>
             <pre><code><%= JSON.stringify(errorMessage, null, 2) %></code></pre>
         </div>
     </section>
