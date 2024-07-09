@@ -6,137 +6,40 @@
     <title>GET / users</title>
     <link rel="stylesheet" href="../../styles.css">
     <link rel="stylesheet" href="../../header.css">
+    <link rel="stylesheet" href="../../hero.css">
+    <link rel="stylesheet" href="../../guide-detail.css">
 </head>
 <body>
 <!-- import header -->
 <%- include('../components/header', { message: message }) %>
+<!-- import hero -->
+<%- include('../components/hero', { hero: hero }) %>
+<!-- main -->
+<main class="container">
+    <section class="guide">
+        <div class="get-all">
+            <h2 class="guide-title"><%= guideTitle %></h2>
+            <p>사용자 조회 API는 등록된 모든 사용자를 조회하여 JSON 형식으로 반환하는 API 입니다.</p>
+            <p>아래는 Fetch API 를 사용한 예시지만 다른 언어에서도 API를 사용할 수 있습니다.</p>
 
-<section class="guide">
-    <div class="get-all">
-        <h1>전체 조회</h1>
-        <h2>EndPoint</h2>
-        <h3>GET users/get/all</h3>
-        <p>이 앤드포인는 모든 유저를 조회하는 역할을 합니다. 클라이언트가 /users/get/all 엔드포인트로 GET 요청을 보내면, 모든 유저 정보를 조회합니다. 성공 시 모든 유저 정보를 반환하며 실패 시 오류 메시지를 반환합니다.</p>
-
-        <h4>Path parameter</h4>
-        <table border="1">
-            <tr>
-                <th>Name</th>
-                <th>Description</th>
-            </tr>
-            <tr>
-                <td>없음</td>
-                <td>이 엔드포인트에는 Path parameter가 없습니다.</td>
-            </tr>
-        </table>
-
-        <h4>Query string parameter</h4>
-        <table border="1" >
-            <tr>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Required</th>
-                <th>Description</th>
-            </tr>
-            <tr>
-                <td>uid</td>
-                <td>varchar</td>
-                <td>X</td>
-                <td>유저의 아이디입니다</td>
-
-        </table>
+            <h4>응답 예시 (성공)</h4>
+            <pre><code><%= JSON.stringify(mock, null, 2) %></code></pre>
+            <h4>응답 예시 (실패)</h4>
+            <pre><code><%= JSON.stringify(errorMessage, null, 2) %></code></pre>
+        </div>
+    </section>
+    <section class="guide">
+        <h2 class="guide-title">EndPoint - GET users/user/{uid}</h2>
+        <p>users/user/{uid} 는 사용자의 고유 식별번호를 사용하여 특정 사용자를 조회하여 JSON 형식으로 반환하는 API 입니다.</p>
+        <p>아래는 Fetch API 를 사용한 예시지만 다른 언어에서도 API를 사용할 수 있습니다.</p>
 
         <h4>응답 예시 (성공)</h4>
-        <pre>
-        {
-            "uid": "123456",
-            "name": "홍길동",
-            "age": 25,
-            "city": "서울",
-            "email": "hong@example.com",
-            "phone": "010-1234-5678",
-            "gender": "남성",
-            "occupation": "개발자",
-            "join_date": "2023-06-07",
-            "address": "서울특별시 강남구",
-            "password": "securepassword123"
-        }
-        </pre>
-        <p>이런식으로 모든 유저의 데이터가 출력됩니다.</p>
-
+        <pre><code><%= JSON.stringify(mock, null, 2) %></code></pre>
         <h4>응답 예시 (실패)</h4>
-        <pre>
-        {
-            "error": "유저 조회 실패: ${error.message}"
-        }
-        </pre>
-    </div>
-</section>
-
-<section class="guide">
-    div class="get-id">
-    <h1>조건부 조회</h1>
-    <h2>EndPoint</h2>
-    <h3>GET users/user/{uid}</h3>
-    <p>이 앤드포인는 특정 유저를 조회하는 역할을 합니다. 클라이언트가 users/user/{uid} 엔드포인트로 GET 요청을 보내면, 특정 유저 아이디의 유저 정보를 조회합니다. 성공 시 모든 유저 정보를 반환하며 실패 시 오류 메시지를 반환합니다.</p>
-
-    <h4>Path parameter</h4>
-    <table border="1">
-        <tr>
-            <th>Name</th>
-            <th>Description</th>
-        </tr>
-        <tr>
-            <td>{uid}</td>
-            <td>유저의 고유 ID입니다.</td>
-        </tr>
-    </table>
-
-    <h4>Query string parameter</h4>
-    <table border="1">
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-        </tr>
-        <tr>
-            <td>없음</td>
-            <td>이 엔드포인트에는 Query string parameter가 없습니다.</td>
-        </tr>
-    </table>
-
-    <h4>응답 예시 (성공)</h4>
-    <pre>
-        {
-            "uid": "123456",
-            "name": "홍길동",
-            "age": 25,
-            "city": "서울",
-            "email": "hong@example.com",
-            "phone": "010-1234-5678",
-            "gender": "남성",
-            "occupation": "개발자",
-            "join_date": "2023-06-07",
-            "address": "서울특별시 강남구",
-            "password": "securepassword123"
-        }
-        </pre>
-    <p>이런식으로 특정 아이디의 유저 데이터가 출력됩니다.</p>
-
-    <h4>응답 예시 (실패)</h4>
-    <pre>
-        {
-            "error": "유저 조회 실패: ${error.message}"
-        }
-        </pre>
-    <pre>
-        {
-            "error": "유저를 찾을 수 없음"
-        }
-        </pre>
-    </div>
-</section>
-
-<!-- import error -->
-<%- include('../components/error') %>
+        <pre><code><%= JSON.stringify(errorMessage, null, 2) %></code></pre>
+    </section>
+    <!-- import error -->
+    <%- include('../components/error') %>
+</main>
 </body>
 </html>
