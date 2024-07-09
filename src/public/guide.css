@@ -1,0 +1,41 @@
+.api-guide-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.api-guide-title {
+    font-size: 2.5rem;
+    color: #333;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.api-guide-nav {
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.api-guide-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.api-guide-item {
+    margin-bottom: 1rem;
+}
+
+.api-guide-link {
+    display: block;
+    padding: 1rem;
+    background-color: #ffffff;
+    color: #333;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.api-guide-link:hover {
+    background-color: #e6efff;
+}

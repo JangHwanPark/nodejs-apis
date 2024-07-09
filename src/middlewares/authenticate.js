@@ -1,10 +1,10 @@
-const jwt = require('jsonwebtoken');
-const { blacklist } = require('../routes/logout'); // 블랙리스트 가져오기
+import jwt from "jsonwebtoken";
+import {isTokenBlacklisted} from "../service/auth/LoginService.js";
 
 const authenticate = (req, res, next) => {
     const token = req.header('Authorization').replace('Bearer ', '');
 
-    if (blacklist.includes(token)) {
+    if (isTokenBlacklisted.includes(token)) {
         return res.status(401).json({
             errorCode: 101,
             errorMessage: "Unauthorized Exception",
@@ -24,4 +24,4 @@ const authenticate = (req, res, next) => {
     }
 };
 
-module.exports = authenticate;
+export default authenticate;

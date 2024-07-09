@@ -11,6 +11,7 @@ const githubApi = axios.create({
     }
 })
 
+
 // 리포지토리 정보
 router.get("/repos/:owner/:repo", async (req, res, next) => {
     const { owner, repo } = req.params;

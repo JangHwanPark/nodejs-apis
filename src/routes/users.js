@@ -16,6 +16,7 @@ router.get("/user/:uid", findUserById);
 router.get('/count', findUserCount);
 router.post("/user/update/:uid", updateUser);
 router.delete("/user/:uid", deleteUserById);
+router.delete("/", deleteUserById);
 
 
 export default router;

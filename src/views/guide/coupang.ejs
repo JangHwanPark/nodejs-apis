@@ -1,0 +1,77 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>GET / coupang</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../header.css">
+    <link rel="stylesheet" href="../../error.css">
+</head>
+<body>
+<!-- import header -->
+<%- include('../components/header', { message: message }) %>
+<section class="guide">
+    <div class="get-coupang-products">
+        <h2>EndPoint</h2>
+        <h3>GET /coupang-products/get/all</h3>
+        <p>이 앤드포인는 쿠팡의 모든 제품을 조회하는 역할을 합니다. 클라이언트가 /coupang-products/get/all 엔드포인트로 GET 요청을 보내면, 모든 쿠팡 제품의 정보를 조회합니다. 성공 시 모든 제품 정보를 반환하며 실패 시 오류 메시지를 반환합니다.</p>
+
+        <h4>Path parameter</h4>
+        <table border="1">
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>없음</td>
+                <td>이 엔드포인트에는 Path parameter가 없습니다.</td>
+            </tr>
+        </table>
+
+        <h4>Query string parameter</h4>
+        <table border="1">
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Required</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>category</td>
+                <td>String</td>
+                <td>X</td>
+                <td>제품의 카테고리입니다. 예: Electronics, toys, women_fashion 기본값은 모든 카테고리입니다.</td>
+            </tr>
+
+        </table>
+
+        <h4>응답 예시 (성공)</h4>
+        <pre>
+        {
+            "pid": "6001",
+            "category": "Electronics",
+            "name": "Smartphone",
+            "base_price": "100000",
+            "price": "90000",
+            "unit_price": "90000",
+            "arrival": "2024-06-11",
+            "rating": "4.5",
+            "reward": "100",
+            "url": "http://example.com/product/123"
+        }
+        </pre>
+        <p>이런식으로 모든 제품의 데이터가 출력됩니다.</p>
+
+        <h4>응답 예시 (실패)</h4>
+        <pre>
+        {
+            "error": "제품 조회 실패: ${error.message}"
+        }
+        </pre>
+    </div>
+</section>
+<!-- import error -->
+<%- include('../components/error') %>
+</body>
+</html>
