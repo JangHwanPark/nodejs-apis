@@ -6,6 +6,10 @@ body {
     color: #333;
 }
 
+.logo {
+    color: #fff;
+}
+
 p {
     font-weight: bold;
     padding-right: 1rem;
@@ -15,27 +19,7 @@ span {
     padding-left: 1rem;
 }
 
-.main_header {
-    background-color: #086fb6;
-    color: white;
-    padding: 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
 
-.main_header h1 {
-    margin: 0 0 0 25px;
-}
-
-.modal-button {
-    font-size: 1.2rem;
-    background-color: transparent;
-    color: #ffffff;
-    border: none;
-    margin-right: 25px;
-    cursor: pointer;
-}
 
 
 section {
@@ -87,10 +71,6 @@ a {
     background-color: #0056b3;
 
 }
-a:hover {
-    text-decoration: underline;
-}
-
 
 input {
     padding: 0.5rem;

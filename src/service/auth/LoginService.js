@@ -7,7 +7,6 @@ import { promisify } from "util";
 import dotenv from "dotenv";
 dotenv.config()
 
-console.log("acc" , process.env.ACCESS_TOKEN_EXPIRATION)
 // Redis 클라이언트 설정
 const redisClient = redis.createClient();
 const setAsync = promisify(redisClient.set).bind(redisClient);
@@ -34,17 +33,13 @@ const generateTokens = (user) => {
 
 // 비밀번호 검증 및 사용자 반환
 const validateCredentials = async (email, password) => {
-  console.log("데이터베이스에서 사용자 찾기 시도:", email);
   const user = await prisma.users.findUnique({
     where: { email }
   });
-  console.log("사용자 찾기 결과:", user);
 
   if (!user) throw new Error('Invalid email');
 
-  console.log("사용자의 비밀번호 검증 시도:", password);
   const isPasswordValid = await bcrypt.compare(password, user.password);
-  console.log("비밀번호 검증 결과:", isPasswordValid);
 
   if (!isPasswordValid) throw new Error('Invalid email or password');
   return user;
@@ -61,7 +56,6 @@ const validateCredentials = async (email, password) => {
  */
 export const authenticateUser = async (email, password) => {
   validateEmailAndPassword(email, password);
-  console.log("이메일과 비밀번호 검증 통과:", email);
 
   try {
     const user = await validateCredentials(email, password);
