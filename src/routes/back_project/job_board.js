@@ -1,4 +1,4 @@
-import pool from "express";
+import pool from "../../utils/dbCon.js";
 import express from "express";
 const router = express.Router();
 

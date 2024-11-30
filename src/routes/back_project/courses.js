@@ -1,5 +1,5 @@
 import express from "express";
-import pool from "express";
+import pool from "../../utils/dbCon.js";
 const router = express.Router();
 
 // Courses 목록 조회
