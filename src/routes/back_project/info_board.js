@@ -3,7 +3,7 @@ import pool from "../../utils/dbCon.js";
 const router = express.Router();
 
 // 게시글 목록 조회
-router.get("/", async (req, res) => {
+router.get("/info/all", async (req, res) => {
     try {
         const [rows] = await pool.query("SELECT * FROM InfoBoard ORDER BY created_at DESC");
         res.status(200).json(rows);

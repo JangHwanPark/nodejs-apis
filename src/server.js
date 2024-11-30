@@ -17,6 +17,8 @@ import {
 } from "./controllers/viewController.js";
 import {retryMiddleware, timeoutMiddleware} from "./middlewares/retry.js";
 
+import testRouter from './routes/test.js';
+
 // __dirname 및 __filename 설정
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -47,6 +49,8 @@ app.get('/guide/get/books', renderBookPage);
 app.get('/guide/get/users', renderUserPage);
 app.use(routes);
 
+// 추가된 라우터
+app.use('/test', testRouter);
 
 // Timeout
 app.use(timeoutMiddleware);
